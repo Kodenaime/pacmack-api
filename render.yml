@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: pacmack-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    env: node
+    envVars:
+      - key: MONGODB_URI
+        fromDatabase:
+          name: your-mongodb
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 10000
