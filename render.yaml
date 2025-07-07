@@ -14,3 +14,7 @@ services:
         generateValue: true
       - key: PORT
         value: 10000
+    # In render.yaml
+autoDeploy:
+  enabled: true
+  pullRequestPreviewsEnabled: true
