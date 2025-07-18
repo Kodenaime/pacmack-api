@@ -19,7 +19,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const corsOptions = {
   origin: [
-    'https://pacmack.com/', // Your production domain
+    'https://pacmack.com', // Your production domain
     'http://localhost:5173' // For local development
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -248,7 +248,7 @@ app.post('/api/contact', async (req, res) => {
     if (message.trim().length < 10) {
       return res.status(400).json({
         success: false,
-        message: 'Message must be at least 10 characters long'
+        message: 'Message must be at least 2 characters long'
       });
     }
 
