@@ -93,9 +93,9 @@ const contactMessageSchema = new mongoose.Schema({
       'Please enter a valid email address'
     ]
   },
-  phone: {
+    phone: {
     type: String,
-    required: [true, 'Phone number is required'],
+    //required: false,  or just remove `required`
     trim: true,
     match: [
       /^[\+]?[1-9][\d]{0,15}$/,
@@ -311,7 +311,7 @@ app.post('/api/contact', async (req, res) => {
 
     // Send email using Resend
     const emailResponse = await resend.emails.send({
-      from: 'pacmack.com', // Replace with your verified domain
+      from: 'info@pacmack.com', // Replace with your verified domain
       to: [process.env.PASTOR_EMAIL],
       subject: `New Contact Message from ${firstName}`,
       html: emailHtml,
