@@ -35,12 +35,14 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('MongoDB connection error:', err));
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ Connected to MongoDB'))
+  .catch(err => {
+    console.error('❌ MongoDB connection error:', err.message);
+    process.exit(1); // Exit the app if the DB connection fails
+  });
+
 
 // Registration Model
 const registrationSchema = new mongoose.Schema({
@@ -54,8 +56,6 @@ const registrationSchema = new mongoose.Schema({
   countryOfResidence: { type: String, required: true },
   regionState: { type: String, required: true },
   sex: { type: String, required: true },
-  // educationLevel: { type: String, required: true },
-  // courseOfStudy: { type: String, required: true },
   currentEngagement: { type: String, required: true },
   sendingOrganization: { type: String, required: true },
   applicantType: { type: String, required: true },
@@ -149,8 +149,6 @@ app.get('/api/registrations/export', async (req, res) => {
       { header: 'Country of Residence', key: 'countryOfResidence', width: 20 },
       { header: 'Region/State', key: 'regionState', width: 15 },
       { header: 'Sex', key: 'sex', width: 10 },
-      // { header: 'Education Level', key: 'educationLevel', width: 20 },
-      // { header: 'Course of Study', key: 'courseOfStudy', width: 20 },
       { header: 'Current Engagement', key: 'currentEngagement', width: 20 },
       { header: 'Sending Organization', key: 'sendingOrganization', width: 25 },
       { header: 'Applicant Type', key: 'applicantType', width: 20 },
