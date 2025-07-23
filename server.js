@@ -34,7 +34,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-// MongoDB Connection
+
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB'))
@@ -42,6 +43,7 @@ mongoose.connect(process.env.MONGODB_URI)
     console.error('❌ MongoDB connection error:', err.message);
     process.exit(1); // Exit the app if the DB connection fails
   });
+
 
 
 // Registration Model
